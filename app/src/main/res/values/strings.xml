@@ -1,0 +1,89 @@
+<resources>
+    <string name="app_name">AgroHelper</string>
+    
+    <!-- Main Activity -->
+    <string name="no_plants">Нет растений</string>
+    <string name="add_your_first_plant">Добавьте ваше первое растение, нажав на кнопку "+"</string>
+    <string name="plant_image">Изображение растения</string>
+    
+    <!-- Add Plant Activity -->
+    <string name="add_plant">Добавить растение</string>
+    <string name="take_picture">Сделать фото</string>
+    <string name="gallery">Галерея</string>
+    <string name="plant_name">Название растения</string>
+    <string name="plant_type">Тип растения</string>
+    <string name="planting_date">Дата посадки</string>
+    <string name="notes">Заметки</string>
+    <string name="save">Сохранить</string>
+    <string name="error_name_required">Введите название растения</string>
+    <string name="plant_saved">Растение сохранено</string>
+    
+    <!-- Plant Detail Activity -->
+    <string name="plant_details">Детали растения</string>
+    <string name="quick_actions">Быстрые действия</string>
+    <string name="water">Полив</string>
+    <string name="fertilize">Удобрение</string>
+    <string name="harvest">Сбор</string>
+    <string name="tasks">Задачи</string>
+    <string name="add_task">Добавить задачу</string>
+    <string name="no_tasks">Нет задач</string>
+    <string name="task_added">Задача добавлена</string>
+    <string name="edit">Редактировать</string>
+    <string name="delete">Удалить</string>
+    <string name="delete_plant">Удалить растение</string>
+    <string name="delete_plant_confirmation">Вы уверены, что хотите удалить это растение?</string>
+    <string name="plant_deleted">Растение удалено</string>
+    <string name="cancel">Отмена</string>
+    <string name="error_plant_not_found">Растение не найдено</string>
+    
+    <!-- Tasks -->
+    <string name="task_water">Полив</string>
+    <string name="task_fertilize">Удобрение</string>
+    <string name="task_harvest">Сбор урожая</string>
+    <string name="delete_task">Удалить задачу</string>
+    
+    <!-- Weather Activity -->
+    <string name="weather">Погода</string>
+    <string name="humidity">Влажность</string>
+    <string name="wind">Ветер</string>
+    <string name="recommendation">Рекомендация</string>
+    <string name="weather_icon">Иконка погоды</string>
+    <string name="temperature_format">%.1f°C</string>
+    <string name="humidity_format">%.0f%%</string>
+    <string name="wind_format">%.1f м/с</string>
+    <string name="location_permission_denied">Разрешение на определение местоположения отклонено</string>
+    <string name="location_not_available">Местоположение недоступно</string>
+    <string name="location_error">Ошибка определения местоположения</string>
+    <string name="weather_error">Ошибка получения данных о погоде</string>
+    
+    <!-- Reference Activity -->
+    <string name="reference">Справочник</string>
+    <string name="search_plants">Поиск растений</string>
+    
+    <!-- Settings Activity -->
+    <string name="settings">Настройки</string>
+    <string name="language">Язык</string>
+    <string name="russian">Русский</string>
+    <string name="english">English</string>
+    <string name="units">Единицы измерения</string>
+    <string name="metric">Метрические (°C, мм)</string>
+    <string name="imperial">Имперские (°F, дюймы)</string>
+    <string name="notifications">Уведомления</string>
+    <string name="enable_notifications">Включить уведомления</string>
+    <string name="appearance">Внешний вид</string>
+    <string name="dark_mode">Темная тема</string>
+    <string name="save_settings">Сохранить настройки</string>
+    <string name="settings_saved">Настройки сохранены</string>
+    
+    <!-- Plant Types -->
+    <string-array name="plant_types">
+        <item>Овощ</item>
+        <item>Фрукт</item>
+        <item>Злак</item>
+        <item>Ягода</item>
+        <item>Цветок</item>
+        <item>Дерево</item>
+        <item>Куст</item>
+        <item>Другое</item>
+    </string-array>
+</resources>
