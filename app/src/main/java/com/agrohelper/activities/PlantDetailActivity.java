@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -130,12 +132,13 @@ public class PlantDetailActivity extends AppCompatActivity {
             calendar.add(Calendar.DAY_OF_MONTH, 1);
             Task task = new Task(plantId, Task.TaskType.WATER, calendar.getTime(), false);
             plantViewModel.insertTask(task);
-            
-            if (currentPlant != null) {
-                notificationHelper.scheduleTaskNotification(task, currentPlant);
-            }
-            
-            Toast.makeText(this, R.string.task_added, Toast.LENGTH_SHORT).show();
+
+            // Задержка 100 мс для обновления ID
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                if (currentPlant != null && task.getId() != 0) {
+                    notificationHelper.scheduleTaskNotification(task, currentPlant);
+                }
+            }, 100);
         });
     }
 

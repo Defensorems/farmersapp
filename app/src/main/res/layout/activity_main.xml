@@ -4,18 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context=".activities.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_background"
+        app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
             app:title="@string/app_name"
+            app:titleTextAppearance="@style/TextAppearance.AgroHelper.Headline"
             app:titleTextColor="@android:color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -30,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:padding="8dp"
+            android:padding="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +45,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="16dp"
+            android:padding="24dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,17 +53,18 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:src="@drawable/ic_empty_plants"
-                android:contentDescription="@string/no_plants" />
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:alpha="0.8"
+                android:contentDescription="@string/no_plants"
+                android:src="@drawable/ic_empty_plants" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/no_plants"
-                android:textSize="18sp"
+                android:textAppearance="@style/TextAppearance.AgroHelper.Subtitle"
                 android:textStyle="bold" />
 
             <TextView
@@ -69,19 +73,34 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="@string/add_your_first_plant"
-                android:textSize="16sp" />
+                android:textAppearance="@style/TextAppearance.AgroHelper.Body"
+                android:textColor="@color/colorTextSecondary" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_first_plant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/add_plant"
+                app:icon="@drawable/ic_add" />
 
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_add_plant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:contentDescription="@string/add_plant"
-        app:srcCompat="@drawable/ic_add" />
+        android:text="@string/add_plant"
+        app:backgroundTint="@color/colorPrimary"
+        app:icon="@drawable/ic_add"
+        app:iconTint="@android:color/white"
+        app:rippleColor="@color/colorRipple"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+        android:textColor="@android:color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

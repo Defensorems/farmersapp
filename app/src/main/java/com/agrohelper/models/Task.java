@@ -2,6 +2,7 @@ package com.agrohelper.models;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -9,21 +10,22 @@ import com.agrohelper.database.DateConverter;
 
 import java.util.Date;
 
-@Entity(tableName = "tasks", 
+@Entity(tableName = "tasks",
         foreignKeys = @ForeignKey(entity = Plant.class,
-                                  parentColumns = "id",
-                                  childColumns = "plantId",
-                                  onDelete = ForeignKey.CASCADE))
+                parentColumns = "id",
+                childColumns = "plantId",
+                onDelete = ForeignKey.CASCADE),
+        indices = {@Index("plantId")})
 public class Task {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    
+
     private int plantId;
     private TaskType taskType;
-    
+
     @TypeConverters(DateConverter.class)
     private Date date;
-    
+
     private boolean isDone;
 
     public enum TaskType {

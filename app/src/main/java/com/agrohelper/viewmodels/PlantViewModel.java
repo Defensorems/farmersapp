@@ -71,7 +71,10 @@ public class PlantViewModel extends AndroidViewModel {
     }
 
     public void insertTask(Task task) {
-        executorService.execute(() -> taskDao.insert(task));
+        executorService.execute(() -> {
+            long taskId = taskDao.insert(task);
+            task.setId((int) taskId);
+        });
     }
 
     public void updateTask(Task task) {

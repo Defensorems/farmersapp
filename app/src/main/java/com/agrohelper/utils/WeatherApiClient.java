@@ -21,7 +21,7 @@ import okhttp3.Response;
 public class WeatherApiClient {
     private static final String TAG = "WeatherApiClient";
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
-    private static final String API_KEY = "YOUR_OPENWEATHER_API_KEY"; // Replace with your API key
+    public static final String API_KEY = "6c9f3821ef0b33dd01dedbd5cd162454"; // Replace with your API key
     
     private final OkHttpClient client;
     private final Context context;
@@ -106,5 +106,24 @@ public class WeatherApiClient {
                 }
             }
         });
+    }
+    // Метод для тестирования без API ключа - возвращает тестовые данные
+    public void getMockWeatherData(WeatherCallback callback) {
+        Log.d(TAG, "Using mock weather data");
+
+        // Создаем тестовые данные о погоде
+        WeatherData mockData = new WeatherData(
+                25.5, // температура
+                65.0, // влажность
+                "Ясно", // описание
+                3.5,  // скорость ветра
+                0.0,  // осадки
+                "01d" // иконка (ясно, день)
+        );
+
+        // Имитируем задержку сети
+        new android.os.Handler().postDelayed(() -> {
+            callback.onWeatherDataReceived(mockData);
+        }, 500);
     }
 }

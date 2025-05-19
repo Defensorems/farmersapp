@@ -1,18 +1,79 @@
-<!-- res/values/colors.xml -->
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Material 3 Colors -->
     <color name="md_theme_light_primary">#6750A4</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">#EADDFF</color>
+    <color name="md_theme_light_onPrimaryContainer">#21005E</color>
     <color name="md_theme_light_secondary">#625B71</color>
     <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_secondaryContainer">#E8DEF8</color>
+    <color name="md_theme_light_onSecondaryContainer">#1E192B</color>
     <color name="md_theme_light_tertiary">#7D5260</color>
     <color name="md_theme_light_onTertiary">#FFFFFF</color>
+    <color name="md_theme_light_tertiaryContainer">#FFD8E4</color>
+    <color name="md_theme_light_onTertiaryContainer">#370B1E</color>
+
+    <!-- Material 3 Dark Theme Colors -->
+    <color name="md_theme_dark_primary">#D0BCFF</color>
+    <color name="md_theme_dark_onPrimary">#371E73</color>
+    <color name="md_theme_dark_primaryContainer">#4F378B</color>
+    <color name="md_theme_dark_onPrimaryContainer">#EADDFF</color>
+    <color name="md_theme_dark_secondary">#CCC2DC</color>
+    <color name="md_theme_dark_onSecondary">#332D41</color>
+    <color name="md_theme_dark_secondaryContainer">#4A4458</color>
+    <color name="md_theme_dark_onSecondaryContainer">#E8DEF8</color>
+    <color name="md_theme_dark_tertiary">#EFB8C8</color>
+    <color name="md_theme_dark_onTertiary">#492532</color>
+    <color name="md_theme_dark_tertiaryContainer">#633B48</color>
+    <color name="md_theme_dark_onTertiaryContainer">#FFD8E4</color>
+
+    <!-- Surface and Background Colors -->
+    <color name="md_theme_light_surface">#FFFBFE</color>
+    <color name="md_theme_light_onSurface">#1C1B1F</color>
+    <color name="md_theme_light_surfaceVariant">#E7E0EC</color>
+    <color name="md_theme_light_onSurfaceVariant">#49454F</color>
+    <color name="md_theme_light_background">#FFFBFE</color>
+    <color name="md_theme_light_onBackground">#1C1B1F</color>
+
+    <color name="md_theme_dark_surface">#1C1B1F</color>
+    <color name="md_theme_dark_onSurface">#E6E1E5</color>
+    <color name="md_theme_dark_surfaceVariant">#49454F</color>
+    <color name="md_theme_dark_onSurfaceVariant">#CAC4D0</color>
+    <color name="md_theme_dark_background">#1C1B1F</color>
+    <color name="md_theme_dark_onBackground">#E6E1E5</color>
 
     <!-- Additional App Colors -->
     <color name="colorBackground">#F5F5F5</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorCardBackground">#FFFFFF</color>
+
+    <!-- Text Colors -->
     <color name="colorText">#212121</color>
     <color name="colorTextSecondary">#757575</color>
-    <color name="colorDivider">#BDBDBD</color>
+    <color name="colorTextHint">#9E9E9E</color>
+    <color name="colorTextLight">#FFFFFF</color>
+
+    <!-- Dividers and Borders -->
+    <color name="colorDivider">#EEEEEE</color>
+    <color name="colorBorder">#E0E0E0</color>
+
+    <!-- Status Colors -->
+    <color name="colorError">#B3261E</color>
+    <color name="colorSuccess">#4CAF50</color>
+    <color name="colorWarning">#FFC107</color>
+    <color name="colorInfo">#2196F3</color>
+
+    <!-- Utility Colors -->
+    <color name="colorShadow">#20000000</color>
+    <color name="colorOverlay">#80000000</color>
+    <color name="colorRipple">#33000000</color>
+
+    <!-- Gradients -->
+    <color name="gradientStart">#6750A4</color>
+    <color name="gradientEnd">#7D5260</color>
+    <color name="gradientWeatherStart">#625B71</color>
+    <color name="gradientWeatherEnd">#7D5260</color>
 
     <!-- Legacy Color Mappings -->
     <color name="colorPrimary">@color/md_theme_light_primary</color>
