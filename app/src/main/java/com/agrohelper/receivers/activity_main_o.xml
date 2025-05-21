@@ -39,43 +39,52 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-<LinearLayout
-    android:id="@+id/empty_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:visibility="gone"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:alpha="0.8"
-        android:contentDescription="@string/no_plants"
-        android:src="@drawable/ic_empty_plants" />
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:alpha="0.8"
+                android:contentDescription="@string/no_plants"
+                android:src="@drawable/ic_empty_plants" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/no_plants"
-        android:textAppearance="@style/TextAppearance.AgroHelper.Subtitle"
-        android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/no_plants"
+                android:textAppearance="@style/TextAppearance.AgroHelper.Subtitle"
+                android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="@string/add_your_first_plant"
-        android:textAppearance="@style/TextAppearance.AgroHelper.Body"
-        android:textColor="@color/colorTextSecondary" />
-</LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/add_your_first_plant"
+                android:textAppearance="@style/TextAppearance.AgroHelper.Body"
+                android:textColor="@color/colorTextSecondary" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_first_plant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/add_plant"
+                app:icon="@drawable/ic_add" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

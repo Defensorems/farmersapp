@@ -39,6 +39,16 @@ public class Task {
         this.isDone = isDone;
     }
 
+    private String notes;
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
     // Getters and Setters
     public int getId() {
         return id;

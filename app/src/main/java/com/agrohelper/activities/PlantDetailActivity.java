@@ -1,18 +1,24 @@
 package com.agrohelper.activities;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Handler;
 import android.os.Looper;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -125,21 +131,105 @@ public class PlantDetailActivity extends AppCompatActivity {
         
         // Set up FAB for adding custom tasks
         FloatingActionButton fab = findViewById(R.id.fab_add_task);
-        fab.setOnClickListener(view -> {
-            // Open dialog to add custom task
-            // For simplicity, we'll just add a water task for tomorrow
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
-            Task task = new Task(plantId, Task.TaskType.WATER, calendar.getTime(), false);
-            plantViewModel.insertTask(task);
+        fab.setOnClickListener(view -> showAddTaskDialog());
+    }
 
-            // Задержка 100 мс для обновления ID
-            new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                if (currentPlant != null && task.getId() != 0) {
-                    notificationHelper.scheduleTaskNotification(task, currentPlant);
-                }
-            }, 100);
+    // Set up FAB for adding custom tasks
+
+
+    // Метод для отображения диалога
+    private void showAddTaskDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_add_task, null);
+        builder.setView(dialogView);
+        builder.setTitle(R.string.add_task);
+
+        // Инициализация элементов диалога
+        Spinner taskTypeSpinner = dialogView.findViewById(R.id.spinner_task_type);
+        Button buttonDate = dialogView.findViewById(R.id.button_date);
+        Button buttonTime = dialogView.findViewById(R.id.button_time);
+        EditText editNotes = dialogView.findViewById(R.id.edit_notes);
+
+        // Настройка спиннера
+        ArrayAdapter<Task.TaskType> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                Task.TaskType.values()
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        taskTypeSpinner.setAdapter(adapter);
+
+        // Выбор даты и времени
+        Calendar selectedDateTime = Calendar.getInstance();
+        selectedDateTime.add(Calendar.HOUR_OF_DAY, 1); // По умолчанию через 1 час
+
+        buttonDate.setOnClickListener(v -> {
+            new DatePickerDialog(
+                    this,
+                    (view, year, month, day) -> {
+                        selectedDateTime.set(year, month, day);
+                        updateDateTimeButtons(buttonDate, buttonTime, selectedDateTime);
+                    },
+                    selectedDateTime.get(Calendar.YEAR),
+                    selectedDateTime.get(Calendar.MONTH),
+                    selectedDateTime.get(Calendar.DAY_OF_MONTH)
+            ).show();
         });
+
+        buttonTime.setOnClickListener(v -> {
+            new TimePickerDialog(
+                    this,
+                    (view, hour, minute) -> {
+                        selectedDateTime.set(Calendar.HOUR_OF_DAY, hour);
+                        selectedDateTime.set(Calendar.MINUTE, minute);
+                        updateDateTimeButtons(buttonDate, buttonTime, selectedDateTime);
+                    },
+                    selectedDateTime.get(Calendar.HOUR_OF_DAY),
+                    selectedDateTime.get(Calendar.MINUTE),
+                    true
+            ).show();
+        });
+
+        updateDateTimeButtons(buttonDate, buttonTime, selectedDateTime);
+
+        // Обработка подтверждения
+        builder.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Task.TaskType taskType = (Task.TaskType) taskTypeSpinner.getSelectedItem();
+                String notes = editNotes.getText().toString().trim();
+
+                Task task = new Task(
+                        plantId,
+                        taskType,
+                        selectedDateTime.getTime(),
+                        false
+                );
+                task.setNotes(notes);
+
+                plantViewModel.insertTask(task);
+
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (currentPlant != null && task.getId() != 0) {
+                            notificationHelper.scheduleTaskNotification(task, currentPlant);
+                        }
+                    }
+                }, 100);
+            }
+        });
+
+        builder.setNegativeButton(R.string.cancel, null);
+        builder.create().show();
+    }
+
+    private void updateDateTimeButtons(Button dateButton, Button timeButton, Calendar calendar) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+
+        dateButton.setText(dateFormat.format(calendar.getTime()));
+        timeButton.setText(timeFormat.format(calendar.getTime()));
     }
 
     private void updateUI(Plant plant) {

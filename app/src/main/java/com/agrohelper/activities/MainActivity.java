@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.agrohelper.R;
 import com.agrohelper.adapters.PlantAdapter;
 import com.agrohelper.viewmodels.PlantViewModel;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         // Initialize views
         emptyView = findViewById(R.id.empty_view);
         fabAddPlant = findViewById(R.id.fab_add_plant);
-        MaterialButton btnAddFirstPlant = findViewById(R.id.btn_add_first_plant);
 
         // Observe plants data
         plantViewModel.getAllPlants().observe(this, plantsList -> {
@@ -77,12 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Set up FAB for adding new plants
         fabAddPlant.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, AddPlantActivity.class);
-            startActivity(intent);
-        });
-
-        // Set up button in empty view
-        btnAddFirstPlant.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, AddPlantActivity.class);
             startActivity(intent);
         });

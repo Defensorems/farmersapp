@@ -35,7 +35,12 @@
     <string name="plant_deleted">Растение удалено</string>
     <string name="cancel">Отмена</string>
     <string name="error_plant_not_found">Растение не найдено</string>
-    
+    <string name="select_task_type">Тип задачи</string>
+    <string name="select_date_and_time">Дата и время</string>
+    <string name="select_date">Выбрать дату</string>
+    <string name="select_time">Выбрать время</string>
+    <string name="notes_hint">Заметки</string>
+    <string name="add">Добавить</string>
     <!-- Tasks -->
     <string name="task_water">Полив</string>
     <string name="task_fertilize">Удобрение</string>
@@ -74,7 +79,7 @@
     <string name="dark_mode">Темная тема</string>
     <string name="save_settings">Сохранить настройки</string>
     <string name="settings_saved">Настройки сохранены</string>
-    
+
     <!-- Plant Types -->
     <string-array name="plant_types">
         <item>Овощ</item>

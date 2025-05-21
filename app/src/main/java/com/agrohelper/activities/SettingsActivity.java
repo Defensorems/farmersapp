@@ -93,18 +93,19 @@ public class SettingsActivity extends AppCompatActivity {
         editor.putBoolean("notifications", notifications);
         
         // Save dark mode setting
-        boolean darkMode = darkModeSwitch.isChecked();
-        editor.putBoolean("dark_mode", darkMode);
+        boolean isDarkMode = darkModeSwitch.isChecked();
+        editor.putBoolean("dark_mode", isDarkMode);
         
         // Apply changes
         editor.apply();
         
         // Apply dark mode
-        if (darkMode) {
+        if (isDarkMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
+        recreate();
         
         Toast.makeText(this, R.string.settings_saved, Toast.LENGTH_SHORT).show();
         finish();
