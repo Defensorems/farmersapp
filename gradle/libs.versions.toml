@@ -1,6 +1,10 @@
 [versions]
 agp = "8.6.1"
+appcompat = "1.7.0"
+compiler = "4.15.1"
+converterGson = "2.9.0"
 glide = "4.16.0"
+glideVersion = "4.15.1"
 kotlin = "2.1.10"
 coreKtx = "1.16.0"
 junit = "4.13.2"
@@ -10,15 +14,27 @@ lifecycleExtensions = "2.2.0"
 lifecycleRuntimeKtx = "2.9.0"
 activityCompose = "1.10.1"
 composeBom = "2025.05.00"
+loggingInterceptor = "4.11.0"
+loggingInterceptorVersion = "4.12.0"
 material = "1.12.0"
 material3 = "1.3.2"
+materialVersion = "1.9.0"
 okhttp = "4.12.0"
 playServicesLocation = "21.3.0"
 preference = "1.2.1"
+retrofit = "2.9.0"
+roomCompiler = "2.5.2"
 roomRuntime = "2.7.1"
+roomRuntimeVersion = "2.5.2"
 
 [libraries]
 # Kotlin
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-room-compiler-v252 = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
+androidx-room-runtime-v252 = { module = "androidx.room:room-runtime", version.ref = "roomRuntimeVersion" }
+compiler-v4151 = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+glide-v4151 = { module = "com.github.bumptech.glide:glide", version.ref = "glideVersion" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 
@@ -52,13 +68,17 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 
 # Material
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
+logging-interceptor-v4120 = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptorVersion" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 
 # Networking
+material-v190 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 
 # Location
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -1,82 +1,71 @@
 package com.agrohelper.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.agrohelper.R;
-import com.agrohelper.models.ReferenceItem;
+import com.agrohelper.models.PlantIdResponse;
 import com.bumptech.glide.Glide;
-
+import java.util.ArrayList;
 import java.util.List;
 
-public class ReferenceAdapter extends RecyclerView.Adapter<ReferenceAdapter.ReferenceViewHolder> {
-    private final Context context;
-    private List<ReferenceItem> referenceItems;
+public class ReferenceAdapter extends RecyclerView.Adapter<ReferenceAdapter.ViewHolder> {
+    private List<PlantIdResponse.Entity> entities = new ArrayList<>();
 
-    public ReferenceAdapter(Context context, List<ReferenceItem> referenceItems) {
-        this.context = context;
-        this.referenceItems = referenceItems;
-    }
-
-    public void updateData(List<ReferenceItem> newItems) {
-        this.referenceItems = newItems;
+    public void submitList(List<PlantIdResponse.Entity> newEntities) {
+        entities.clear();
+        if (newEntities != null) {
+            entities.addAll(newEntities);
+        }
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public ReferenceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_reference, parent, false);
-        return new ReferenceViewHolder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_reference, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReferenceViewHolder holder, int position) {
-        ReferenceItem item = referenceItems.get(position);
-        
-        holder.nameTextView.setText(item.getName());
-        holder.typeTextView.setText(item.getType());
-        holder.descriptionTextView.setText(item.getDescription());
-        
-        // Load image
-        Glide.with(context)
-                .load(item.getImageResId())
-                .centerCrop()
-                .into(holder.imageView);
-        
-        // Set up expand/collapse functionality
-        holder.itemView.setOnClickListener(v -> {
-            boolean isExpanded = holder.careInstructionsTextView.getVisibility() == View.VISIBLE;
-            holder.careInstructionsTextView.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
-        });
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        PlantIdResponse.Entity entity = entities.get(position);
+
+        // Установка названия
+        holder.name.setText(entity.getEntityName());
+
+        // Установка matched_in
+        holder.matchedIn.setText("Совпадение: " + entity.getMatchedIn());
+
+        // Установка типа совпадения
+        holder.matchedInType.setText("Тип: " + entity.getMatchedInType());
+
+        // Очистка изображения, если нет данных
+        holder.image.setImageResource(android.R.color.transparent);
     }
 
     @Override
     public int getItemCount() {
-        return referenceItems.size();
+        return entities.size();
     }
 
-    static class ReferenceViewHolder extends RecyclerView.ViewHolder {
-        final ImageView imageView;
-        final TextView nameTextView;
-        final TextView typeTextView;
-        final TextView descriptionTextView;
-        final TextView careInstructionsTextView;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView name;
+        TextView matchedIn;
+        TextView matchedInType;
+        ImageView image;
 
-        ReferenceViewHolder(@NonNull View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.reference_image);
-            nameTextView = itemView.findViewById(R.id.reference_name);
-            typeTextView = itemView.findViewById(R.id.reference_type);
-            descriptionTextView = itemView.findViewById(R.id.reference_description);
-            careInstructionsTextView = itemView.findViewById(R.id.reference_care_instructions);
+            name = itemView.findViewById(R.id.entity_name);
+            matchedIn = itemView.findViewById(R.id.matched_in);
+            matchedInType = itemView.findViewById(R.id.matched_in_type);
+            image = itemView.findViewById(R.id.entity_image);
         }
     }
 }

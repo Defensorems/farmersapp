@@ -93,4 +93,25 @@ dependencies {
 
     // Networking
     implementation libs.okhttp
+
+    // Retrofit
+    implementation libs.retrofit
+    implementation libs.converter.gson
+
+    // Glide
+    implementation libs.glide.v4151
+    annotationProcessor libs.compiler.v4151
+
+    // Room (если используется)
+    implementation libs.androidx.room.runtime.v252
+    annotationProcessor libs.androidx.room.compiler.v252
+
+    implementation libs.logging.interceptor
+
+    // Material Design
+    implementation libs.material.v190
+    implementation libs.androidx.appcompat
+    implementation libs.material
+
+    implementation libs.logging.interceptor.v4120
 }

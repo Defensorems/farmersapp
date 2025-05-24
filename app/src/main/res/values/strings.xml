@@ -91,4 +91,6 @@
         <item>Куст</item>
         <item>Другое</item>
     </string-array>
+
+    <string name="search">Поиск</string>
 </resources>

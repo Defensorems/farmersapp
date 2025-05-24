@@ -1,46 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".activities.ReferenceActivity">
 
+    <!-- AppBar с тулбаром -->
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:titleTextColor="@android:color/white" />
+            app:title="@string/app_name"
+            app:navigationIcon="@drawable/ic_back"
+            app:titleTextColor="@android:color/white"
+            app:menu="@menu/reference_menu"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- Основной контент -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <SearchView
+        <!-- Поисковая строка -->
+        <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:background="@drawable/search_background"
             android:iconifiedByDefault="false"
-            android:queryHint="@string/search_plants" />
+            android:queryHint="@string/search_plants"
+            app:searchHintIcon="@null"/>
 
+        <!-- Список растений -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/reference_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:padding="8dp" />
+            android:padding="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_reference"/>
 
     </LinearLayout>
+
+    <!-- Индикатор загрузки -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
