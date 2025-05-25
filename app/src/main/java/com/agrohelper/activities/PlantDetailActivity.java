@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -151,11 +152,28 @@ public class PlantDetailActivity extends AppCompatActivity {
         EditText editNotes = dialogView.findViewById(R.id.edit_notes);
 
         // Настройка спиннера
-        ArrayAdapter<Task.TaskType> adapter = new ArrayAdapter<>(
+        ArrayAdapter<Task.TaskType> adapter = new ArrayAdapter<Task.TaskType>(
                 this,
                 android.R.layout.simple_spinner_item,
                 Task.TaskType.values()
-        );
+        ) {
+            @NonNull
+            @Override
+            public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView textView = (TextView) view.findViewById(android.R.id.text1);
+                textView.setText(getItem(position).getLabelResId());
+                return view;
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView textView = (TextView) view.findViewById(android.R.id.text1);
+                textView.setText(getItem(position).getLabelResId());
+                return view;
+            }
+        };
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         taskTypeSpinner.setAdapter(adapter);
 

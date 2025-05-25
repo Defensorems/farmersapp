@@ -6,6 +6,7 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import com.agrohelper.R;
 import com.agrohelper.database.DateConverter;
 
 import java.util.Date;
@@ -29,7 +30,19 @@ public class Task {
     private boolean isDone;
 
     public enum TaskType {
-        WATER, FERTILIZE, HARVEST
+        WATER(R.string.task_type_water),
+        FERTILIZE(R.string.task_type_fertilize),
+        HARVEST(R.string.task_type_harvest);
+
+        private final int labelResId;
+
+        TaskType(int labelResId) {
+            this.labelResId = labelResId;
+        }
+
+        public int getLabelResId() {
+            return labelResId;
+        }
     }
 
     public Task(int plantId, TaskType taskType, Date date, boolean isDone) {

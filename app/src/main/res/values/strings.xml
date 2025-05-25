@@ -93,4 +93,7 @@
     </string-array>
 
     <string name="search">Поиск</string>
+    <string name="task_type_water">Полив</string>
+    <string name="task_type_fertilize">Удобрение</string>
+    <string name="task_type_harvest">Сбор урожая</string>
 </resources>
