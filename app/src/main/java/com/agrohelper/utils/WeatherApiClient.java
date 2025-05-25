@@ -41,7 +41,7 @@ public class WeatherApiClient {
 
     public void getWeatherByLocation(double latitude, double longitude, WeatherCallback callback) {
         String url = BASE_URL + "?lat=" + latitude + "&lon=" + longitude + 
-                     "&units=metric&appid=" + API_KEY;
+                     "&units=metric&lang=ru&appid=" + API_KEY;
         
         Request request = new Request.Builder()
                 .url(url)

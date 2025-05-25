@@ -1,5 +1,8 @@
 package com.agrohelper.models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class WeatherData {
     private double temperature;
     private double humidity;
@@ -9,8 +12,21 @@ public class WeatherData {
     private String icon;
     private String recommendation;
 
-    public WeatherData(double temperature, double humidity, String description, 
-                      double windSpeed, double precipitation, String icon) {
+    private static final Map<String, String> WEATHER_TRANSLATIONS = new HashMap<>();
+    static {
+        WEATHER_TRANSLATIONS.put("clear sky", "Ясно");
+        WEATHER_TRANSLATIONS.put("few clouds", "Небольшая облачность");
+        WEATHER_TRANSLATIONS.put("scattered clouds", "Облачно");
+        WEATHER_TRANSLATIONS.put("broken clouds", "Пасмурно");
+        WEATHER_TRANSLATIONS.put("shower rain", "Ливень");
+        WEATHER_TRANSLATIONS.put("rain", "Дождь");
+        WEATHER_TRANSLATIONS.put("thunderstorm", "Гроза");
+        WEATHER_TRANSLATIONS.put("snow", "Снег");
+        WEATHER_TRANSLATIONS.put("mist", "Туман");
+    }
+
+    public WeatherData(double temperature, double humidity, String description,
+                       double windSpeed, double precipitation, String icon) {
         this.temperature = temperature;
         this.humidity = humidity;
         this.description = description;
@@ -20,8 +36,13 @@ public class WeatherData {
         this.recommendation = generateRecommendation();
     }
 
+    public String getLocalizedDescription() {
+        return WEATHER_TRANSLATIONS.getOrDefault(description.toLowerCase(), description);
+    }
+
     private String generateRecommendation() {
-        // Logic to generate recommendations based on weather conditions
+        String localizedDesc = getLocalizedDescription().toLowerCase();
+
         if (precipitation > 0) {
             return "Осадки ожидаются. Отложите полив растений.";
         } else if (temperature > 30) {
@@ -29,63 +50,27 @@ public class WeatherData {
         } else if (windSpeed > 10) {
             return "Сильный ветер. Проверьте опоры для высоких растений.";
         }
-        return "Благоприятные условия для садоводства.";
+
+        switch (localizedDesc) {
+            case "дождь":
+                return "Избегайте полива и работ с почвой.";
+            case "ясно":
+                return "Идеальные условия для полевых работ.";
+            case "небольшая облачность":
+            case "облачно":
+                return "Подходящее время для посадки культур.";
+            default:
+                return "Благоприятные условия для садоводства.";
+        }
     }
 
-    // Getters and Setters
-    public double getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
-    }
-
-    public double getHumidity() {
-        return humidity;
-    }
-
-    public void setHumidity(double humidity) {
-        this.humidity = humidity;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getWindSpeed() {
-        return windSpeed;
-    }
-
-    public void setWindSpeed(double windSpeed) {
-        this.windSpeed = windSpeed;
-    }
-
-    public double getPrecipitation() {
-        return precipitation;
-    }
-
-    public void setPrecipitation(double precipitation) {
-        this.precipitation = precipitation;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
+    // Getters
     public String getRecommendation() {
         return recommendation;
     }
-
-    public void setRecommendation(String recommendation) {
-        this.recommendation = recommendation;
-    }
+    public double getTemperature() { return temperature; }
+    public double getHumidity() { return humidity; }
+    public String getDescription() { return description; }
+    public double getWindSpeed() { return windSpeed; }
+    public String getIcon() { return icon; }
 }
