@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.agrohelper.models.Task;
+import com.agrohelper.models.Task.TaskType;
 
 import java.util.Date;
 import java.util.List;
@@ -26,6 +27,10 @@ public interface TaskDao {
     @Query("SELECT * FROM tasks WHERE plantId = :plantId ORDER BY date ASC")
     LiveData<List<Task>> getTasksForPlant(int plantId);
 
+    // Синхронная версия для экспорта
+    @Query("SELECT * FROM tasks")
+    List<Task> getAllTasksSync();
+
     @Query("SELECT * FROM tasks WHERE date BETWEEN :startDate AND :endDate ORDER BY date ASC")
     LiveData<List<Task>> getTasksInDateRange(Date startDate, Date endDate);
 
@@ -33,5 +38,5 @@ public interface TaskDao {
     LiveData<List<Task>> getPendingTasks();
 
     @Query("SELECT * FROM tasks WHERE taskType = :taskType ORDER BY date ASC")
-    LiveData<List<Task>> getTasksByType(Task.TaskType taskType);
+    LiveData<List<Task>> getTasksByType(TaskType taskType);
 }

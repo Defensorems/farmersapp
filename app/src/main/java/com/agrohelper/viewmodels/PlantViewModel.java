@@ -1,6 +1,7 @@
 package com.agrohelper.viewmodels;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -21,10 +22,12 @@ public class PlantViewModel extends AndroidViewModel {
     private final PlantDao plantDao;
     private final TaskDao taskDao;
     private final ExecutorService executorService;
+    private final Context appContext;
 
     public PlantViewModel(@NonNull Application application) {
         super(application);
-        AppDatabase database = AppDatabase.getInstance(application);
+        appContext = application.getApplicationContext();
+        AppDatabase database = AppDatabase.getInstance(appContext);
         plantDao = database.plantDao();
         taskDao = database.taskDao();
         executorService = Executors.newFixedThreadPool(4);
@@ -46,15 +49,22 @@ public class PlantViewModel extends AndroidViewModel {
     public void insertPlant(Plant plant) {
         executorService.execute(() -> {
             long plantId = plantDao.insert(plant);
+            notifyDatabaseChanged(); // Уведомление об изменении
         });
     }
 
     public void updatePlant(Plant plant) {
-        executorService.execute(() -> plantDao.update(plant));
+        executorService.execute(() -> {
+            plantDao.update(plant);
+            notifyDatabaseChanged(); // Уведомление об изменении
+        });
     }
 
     public void deletePlant(Plant plant) {
-        executorService.execute(() -> plantDao.delete(plant));
+        executorService.execute(() -> {
+            plantDao.delete(plant);
+            notifyDatabaseChanged(); // Уведомление об изменении
+        });
     }
 
     // Task operations
@@ -74,15 +84,42 @@ public class PlantViewModel extends AndroidViewModel {
         executorService.execute(() -> {
             long taskId = taskDao.insert(task);
             task.setId((int) taskId);
+            notifyDatabaseChanged(); // Уведомление об изменении
         });
     }
 
     public void updateTask(Task task) {
-        executorService.execute(() -> taskDao.update(task));
+        executorService.execute(() -> {
+            taskDao.update(task);
+            notifyDatabaseChanged(); // Уведомление об изменении
+        });
     }
 
     public void deleteTask(Task task) {
-        executorService.execute(() -> taskDao.delete(task));
+        executorService.execute(() -> {
+            taskDao.delete(task);
+            notifyDatabaseChanged(); // Уведомление об изменении
+        });
+    }
+
+    // Уведомление об изменении базы данных
+    private void notifyDatabaseChanged() {
+        if (AppDatabase.isAutoExportEnabled()) {
+            AppDatabase.notifyDataChanged(appContext);
+        }
+    }
+
+    // Методы для управления автоэкспортом
+    public void enableAutoExport() {
+        AppDatabase.setAutoExportEnabled(true);
+    }
+
+    public void disableAutoExport() {
+        AppDatabase.setAutoExportEnabled(false);
+    }
+
+    public boolean isAutoExportEnabled() {
+        return AppDatabase.isAutoExportEnabled();
     }
 
     @Override
